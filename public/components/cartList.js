@@ -26,14 +26,17 @@ angular
 
     <div>
         <form ng-submit="addItem(item)">
+            Add Item
             <input type="text" ng-model="form.text1">
         </form>
 
         <form ng-submit="removeItem(id)">
+            Remove Item
             <input type="number" ng-model="form.number1">
         </form>
 
         <form ng-submit="updateItem(item)">
+            Update Item
             <input type="text" ng-model="form.text2"
         </form>
 
