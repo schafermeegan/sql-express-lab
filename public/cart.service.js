@@ -16,6 +16,37 @@ function CartService ($http, $q) {
     }
 }
 
+service.removeItem = (id) => {
+    return $http({
+        url: "/cartItems/" + id,
+        method: "DELETE"
+    }) .then( (response) => {
+        console.log(response.data);
+        resolve(response.data);
+    });
+}
+
+service.updateItem = (item) => {
+    return $http({
+        url: "/cartItems/" + id,
+        method: "PUT"
+    }) .then( (response) => {
+        console.log(response.data);
+        resolve(response.data);
+    });
+}
+
+service.addItem = (item) => {
+    return $http({
+        url: "/cartItems/" = id,
+        method: "POST"
+    }) .then( (response) => {
+        console.log(response.data);
+        resolve(response.data);
+    });
+}
+
+
 angular
 .module('CartApp')
 .service('CartService', CartService);
