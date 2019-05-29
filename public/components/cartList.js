@@ -1,17 +1,30 @@
 function CartList(CartService) {
     const ctrl = this;
 
-    ctrl.getList = () => {
-        CartService.getCartData()
-        .then( (data) => {
-            ctrl.cartItems = data;
-        })
-        .catch( (err) => {
-            console.log(err);
-        })
-    };
-    ctrl.getList();
+//     ctrl.getList = () => {
+//         CartService.getCartData()
+//         .then( (data) => {
+//             ctrl.cartItems = data;
+//         })
+//         .catch( (err) => {
+//             console.log(err);
+//         })
+//     };
+//     ctrl.getList();
+// }
+
+ctrl.addItem = (item) => {
+
 }
+
+ctrl.removeItem = (id) => {
+
+}
+
+ctrl.updateItem = (item) => {
+
+}
+
 
 
 angular
