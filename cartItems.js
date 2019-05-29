@@ -40,9 +40,9 @@ cartItems.get('/cartItems/:id', (req, res) => {
 
 cartItems.post("/cartItems", (req, res) => {
     let data = req.body;
-    let sql = "INSERT INTO shoppingcart (product, price, quantity)" +
-    "VALUES($1::real, $2::text, $3::int)";
-    let params = [data.product, data.price, data.quantity];
+    let sql = "INSERT INTO shoppingcart (id, product, price, quantity)" +
+    "VALUES($1::init, $2::string, $3::int, $4::int)";
+    let params = [data.id, data.product, data.price, data.quantity];
     pool.query(sql, params).then( (result) => {
         res.status(201);
         res.send('Updated Cart');
@@ -52,7 +52,7 @@ cartItems.post("/cartItems", (req, res) => {
 cartItems.put("/cartItems/:id", (req, res) => {
     let id = req.params.id;
     let data = req.body;
-    let sql = "UPDATE shoppingcart SET product=$1::prodcut WHERE id=$2::id";
+    let sql = "UPDATE shoppingcart SET product=$4::prodcut WHERE id=$1::id";
     let params = [data.name, id];
 
     pool.query(sql, params)
@@ -65,13 +65,15 @@ cartItems.delete("/cartItems/:id", (req, res) => {
     let id = req.params.id;
     let data = req.body;
     let sql = "DELETE FROM shoppingcart WHERE id=$1::int"
-    pool.query("DELETE FROM shoppingcart WHERE id=$2::id;")
+    pool.query("DELETE FROM shoppingcart(id, product, price, quantity) VALUES $1::init, $2::string, $3::int, $4::int;")
     .then( (result) => {
         res.send(result.rows);
     })
 })
 
-module.exports = cartItems;
+module.exports = cartItems, cartData;
+
+
 
 
 
@@ -105,21 +107,7 @@ module.exports = cartItems;
     // accept POST request at URI: /cart-items
 
     
-
-
-
-
-
-    
 // app.use(express.static("./public"));
-
-
-
-
-
-
-
-
 
 
 // // //will refer to the 
