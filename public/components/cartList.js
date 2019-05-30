@@ -13,6 +13,10 @@ function CartList(CartService) {
 //     ctrl.getList();
 // }
 
+ctrl.removeItem =
+ctrl.addItem =
+ctrl.updateItem =
+
 ctrl.addItem = (item) => {
 
 }
