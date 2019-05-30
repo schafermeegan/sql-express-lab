@@ -1,77 +1,33 @@
 const express = require("express");
 const cartItems = express.Router();
-const cartData = require('./cartData');
+//const cartData = require('./cartData');
 
 cartItems.get('/', (req, res) => {
    res.send(cartData);
 });
 
-const pg = require("pg");
-const pool = new pg.Pool({
-    user: "ExpressShopDB",
-    password: "Isla5313",
-    host: "localhost",
-    port: 5432,
-    database: "ExpressShopDB",
-    ssl: false
-});
-
-cartItems.get("/cartItems", (req, res) => {
-    pool.query("SELECT * FROM shoppingcart;")
-    .then( (result) => {
-        res.send(result.rows);
-    })
-});
-
-cartItems.get('/cartItems/:id', (req, res) => {
-    //getting the ID from the URL and setting it
-    //to the array
-    let index = req.params.id;
-
-    //if exists inside of the array
-    if(cartData[index]) {
-        res.send(cartData[index]);
-    } else {
-        //Something went wrong
-        res.send("Nope");
-    }
-});
+    // accept POST request at URI: /cartItems
+    cartItems.post("/cartItems", (req, res) => {
+        console.log(req.body); // <-- this is the data that has been extracted from the reque
+        res.send("Adding an item..");
+        });
 
 
-cartItems.post("/cartItems", (req, res) => {
-    let data = req.body;
-    let sql = "INSERT INTO shoppingcart (id, product, price, quantity)" +
-    "VALUES($1::init, $2::string, $3::int, $4::int)";
-    let params = [data.id, data.product, data.price, data.quantity];
-    pool.query(sql, params).then( (result) => {
-        res.status(201);
-        res.send('Updated Cart');
-    });
-});
+    cartItems.put("/cartItems/:id", (req, res) => {
+        console.log(req.params.id); // <-- params for the URL
+        res.send("Got for a specific id: " + req.params.id);
+        });
 
-cartItems.put("/cartItems/:id", (req, res) => {
-    let id = req.params.id;
-    let data = req.body;
-    let sql = "UPDATE shoppingcart SET product=$4::prodcut WHERE id=$1::id";
-    let params = [data.name, id];
 
-    pool.query(sql, params)
-    .then( () => {
-        res.send('Success');
-    });
-});
-
+    // accept DELETE request at URI: /cartItems
 cartItems.delete("/cartItems/:id", (req, res) => {
-    let id = req.params.id;
-    let data = req.body;
-    let sql = "DELETE FROM shoppingcart WHERE id=$1::int"
-    pool.query("DELETE FROM shoppingcart(id, product, price, quantity) VALUES $1::init, $2::string, $3::int, $4::int;")
-    .then( (result) => {
-        res.send(result.rows);
-    })
-})
+    console.log(req.params.id); // <-- params for the URL
+    res.send("Deleting an item..");
+});
 
-module.exports = cartItems, cartData;
+
+
+module.exports = cartItems;
 
 
 
