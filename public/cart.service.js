@@ -26,9 +26,11 @@ service.removeItem = (id) => {
     });
 }
 
+
+
 service.updateItem = (item) => {
     return $http({
-        url: "/cartItems/" + id,
+        url: "/cartItems/" + item,
         method: "PUT"
     }) .then( (response) => {
         console.log(response.data);
@@ -38,7 +40,7 @@ service.updateItem = (item) => {
 
 service.addItem = (item) => {
     return $http({
-        url: "/cartItems/" = id,
+        url: "/cartItems/" = item,
         method: "POST"
     }) .then( (response) => {
         console.log(response.data);

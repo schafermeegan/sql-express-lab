@@ -40,6 +40,9 @@ app.post("/shoppingcart", (req, res) => {
     })
 })
 
+app.listen(2000, () => {
+    console.log("JSON Server is running on 2000")
+});
 
 // app.put("/shoppingcart/:id", (req, res) => {
 //     let id = req.params.id;
@@ -82,6 +85,3 @@ app.post("/shoppingcart", (req, res) => {
 //use this for heroku
 // const port = process.env.PORT || 5000;
 
-app.listen(2000, () => {
-    console.log("JSON Server is running on 2000")
-});
