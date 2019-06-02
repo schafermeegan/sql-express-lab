@@ -40,30 +40,28 @@ app.post("/shoppingcart", (req, res) => {
     })
 })
 
-app.listen(2000, () => {
-    console.log("JSON Server is running on 2000")
-});
 
-// app.put("/shoppingcart/:id", (req, res) => {
-//     let id = req.params.id;
-//     let data = req.body;
-//     let sql = "UPDATE shoppingcart SET product=$1::prodcut WHERE id=$2::id";
-//     let params = [data.name, id];
 
-//     pool.query(sql, params)
-//     .then( () => {
-//         res.send('Success');
-//     })
-// })
+app.put("/shoppingcart/:id", (req, res) => {
+    let id = req.params.id;
+    let data = req.body;
+    let sql = "UPDATE shoppingcart SET product=$1::prodcut WHERE id=$2::id";
+    let params = [data.name, id];
+
+    pool.query(sql, params)
+    .then( () => {
+        res.send('Success');
+    })
+})
 
 
 
-// app.delete("/shoppingcart", (req, res) => {
-//     pool.query("DELETE FROM shoppingcart WHERE id=$2::id;")
-//     .then( (result) => {
-//         res.send(result.rows);
-//     })
-// })
+app.delete("/shoppingcart", (req, res) => {
+    pool.query("DELETE FROM shoppingcart WHERE id=$2::id;")
+    .then( (result) => {
+        res.send(result.rows);
+    })
+})
 
 // //will refer to the 
 // const cartItems = require("./cartItems");
@@ -79,9 +77,16 @@ app.listen(2000, () => {
 
 // const port = 2000;
 
-//run the server!
-// app.listen(port, () => console.log('listening on port: http://localhost:${port}'));
+// run the server!
+app.listen(port, () => console.log('listening on port: http://localhost:${port}'));
 
 //use this for heroku
 // const port = process.env.PORT || 5000;
+
+
+
+
+
+// module.exports = cartItems;
+
 
