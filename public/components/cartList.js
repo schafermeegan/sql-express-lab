@@ -13,20 +13,31 @@ function CartList(CartService) {
 //     ctrl.getList();
 // }
 
-ctrl.removeItem =
-ctrl.addItem =
-ctrl.updateItem =
-
-ctrl.addItem = (item) => {
-
+ctrl.addItem = (addedProduct, totalPrice, updateQuantity) => {
+    let addedItem = {
+        product: addedProduct,
+        price: totalPrice,
+        quantity: updateQuantity
+    }
+    CartService.addItem(addedItem)
+        .then( (data) => {
+            ctrl.cartData = data;
+        })
 }
 
-ctrl.removeItem = (id) => {
-
+ctrl.removeItem = (item) => {
+    CartListService.removeItem(item)
+        .then( (data) => {
+            ctrl.cartData = data;
+        })
 }
 
 ctrl.updateItem = (item) => {
-
+    CartService.updateItem(item)
+        .then( (data) => {
+            ctrl.cartData = data;
+        })
+    }
 }
 
 
@@ -34,9 +45,14 @@ ctrl.updateItem = (item) => {
 angular
 .module('CartApp')
 .component('cartList', {
-  controller: CartList,
+  controller: cartList,
   template:
   `
+
+
+    "addedProduct"
+    "totalPrice"
+    "updateQuantity"
   <div>
       <h2>Shopping Cart<h2>
       </div>
@@ -55,4 +71,4 @@ angular
       </form>
   </div>
   `
-});
+})
