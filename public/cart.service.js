@@ -57,4 +57,4 @@ service.addItem = (item) => {
 angular
 .module('CartApp')
 .service('CartService', CartService);
-
+}
